@@ -1,4 +1,4 @@
-import {type Locator, type Page} from '@playwright/test';
+import {type Locator, type Page, expect} from '@playwright/test';
 
 export class PLP {
     page : Page;
@@ -46,6 +46,14 @@ export class PLP {
             fullPage: true
         });
     }
-        
     
+    async ReviewWordsInUrl(query: string) {
+        const currentUrl = decodeURIComponent(this.page.url());
+        const words = query.split(' ');
+
+        for (const word of words) {
+            await expect(currentUrl).toContain(word);
+        }
+    }
+
 }

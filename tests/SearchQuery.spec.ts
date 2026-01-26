@@ -1,4 +1,4 @@
-    import {test} from '@playwright/test';
+    import {test, expect} from '@playwright/test';
     import {MainPage} from '../pages/Main_Page.ts';
     import {PLP} from '../pages/PLP.ts';
 
@@ -6,13 +6,18 @@
         const mainpage = new MainPage(page);
         const plp = new PLP(page);
 
+        const search = 'dress red'; // Declare the query to search
+
         await page.goto('https://www.villagegreencentre.com/shop');
-        await mainpage.SearchProduct('dress');
+
+        await mainpage.SearchProduct(search);
 
         await plp.ClosePopup();
         await plp.ScrollToBottom();
         await plp.ClosePopup();
         await plp.TakeScreenshot();
+
+        await plp.ReviewWordsInUrl(search);
         
         await plp.ClosePopup();
         await plp.SortHighToLow();
