@@ -1,42 +1,42 @@
 [
   {
     "name": "cushmanwakefield-bayshore-shopping-centre",
-    "url": "https://bayshoreshoppingcentre.com/whatsinstore",
+    "url": "https://bayshore-shopping-centre.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "cushmanwakefield-erin-mills",
-    "url": "https://erinmills.ca/whatsinstore",
+    "url": "http://erin-mills.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "cushmanwakefield-midtown",
-    "url": "https://shopmidtown.ca/whatsinstore",
+    "url": "http://midtown.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "bentallgreenoak-village-green",
-    "url": "https://www.villagegreencentre.com/shop",
+    "url": "https://village-green.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "kings-cross",
-    "url": "https://www.kingscross.co.uk/shop",
+    "url": "https://kings-cross.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "plaza-las-americas",
-    "url": "http://plazaplus.plazalasamericas.com",
+    "url": "https://plaza-las-americas.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "plaza-del-caribe",
-    "url": "http://plazaplus.plazadelcaribe.com/",
+    "url": "https://plaza-del-caribe.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   },
   {
     "name": "mall-of-america",
-    "url": "http://shop.mallofamerica.com",
+    "url": "https://mall-of-america.ui-stg.mall.adeptmind.ai",
     "lang": "en"
   }
 ]

@@ -1,17 +1,20 @@
 import { defineConfig, devices } from '@playwright/test';
+require('dotenv').config();
 
 export default defineConfig({
   testDir: './tests',
   timeout: 120000,
-  fullyParallel: false, 
+  fullyParallel: false,
   reporter: [['html', { open: 'never' }]],
   use: {
-    screenshot: {
-      mode: 'on',
-      fullPage: true, 
+    // Las credenciales ya no están escritas aquí, se leen del sistema
+    httpCredentials: {
+      username: process.env.MALL_HTTP_USER || '',
+      password: process.env.MALL_HTTP_PASSWORD || '',
     },
-    trace: 'on',             
-    video: 'on-first-retry', 
+    screenshot: { mode: 'on', fullPage: true },
+    trace: 'on',
+    video: 'on-first-retry',
     viewport: { width: 1280, height: 720 },
   },
   projects: [

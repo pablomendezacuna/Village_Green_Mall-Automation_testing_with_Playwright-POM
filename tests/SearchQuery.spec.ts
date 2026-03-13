@@ -16,8 +16,10 @@ test.describe('Mall Search Validation', () => {
                 testInfo.annotations.push({ type: 'URL Original', description: mall.url });
 
                 try {
+                    // La navegación ahora usará automáticamente el user/pass del config
                     await mainPage.navigateTo(mall.url);
                     await mainPage.searchFor(query.term, mall.lang);
+                    
                     await plpPage.scrollToBottom();
                     
                     testInfo.annotations.push({ type: 'URL Resultados', description: page.url() });
