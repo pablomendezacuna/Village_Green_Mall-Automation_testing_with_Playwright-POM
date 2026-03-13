@@ -29,7 +29,6 @@ export class MainPage {
     async searchFor(query: string, lang: string) {
         await this.closePopup(lang);
         
-        // Buscamos cualquier input que parezca un buscador por tipo o placeholder
         const inputSelectors = 'input[type="search"], input[placeholder*="Search" i], input[placeholder*="Buscar" i], .search-input';
         let input = this.page.locator(inputSelectors).first();
 

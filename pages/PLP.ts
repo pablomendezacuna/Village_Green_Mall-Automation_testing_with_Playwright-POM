@@ -8,7 +8,6 @@ export class PlpPage {
     }
 
     async scrollToBottom() {
-        // Desplazamiento gradual para activar el lazy loading
         await this.page.evaluate(async () => {
             await new Promise((resolve) => {
                 let totalHeight = 0;
@@ -24,7 +23,6 @@ export class PlpPage {
                 }, 100);
             });
         });
-        // Espera a que las imágenes terminen de cargar después del scroll
         await this.page.waitForLoadState('networkidle').catch(() => {});
     }
 }

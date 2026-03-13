@@ -1,33 +1,30 @@
-import { test } from "@playwright/test";
-import { MainPage } from "../pages/Main_Page";
-import { PlpPage } from "../pages/Plp";
+import { test } from '@playwright/test';
+import { MainPage } from '../pages/main_page';
+import { PlpPage } from '../pages/Plp';
 
-// Importación estándar de JSON para Playwright
-const dataMalls = require("../fixtures/MyMalls.json");
-const dataQueries = require("../fixtures/Queries.json");
+// Importación de datos
+import dataMalls from '../fixtures/MyMalls.json';
+import dataQueries from '../fixtures/Queries.json';
 
-test.describe("Mall Search Validation", () => {
+test.describe('Mall Search Validation', () => {
     for (const mall of dataMalls) {
         for (const query of dataQueries) {
             test(`${mall.name} | ${query.term}`, async ({ page }, testInfo) => {
                 const mainPage = new MainPage(page);
                 const plpPage = new PlpPage(page);
 
-                // Agregar URL original a las anotaciones del reporte
                 testInfo.annotations.push({ type: 'URL Original', description: mall.url });
 
                 try {
                     await mainPage.navigateTo(mall.url);
                     await mainPage.searchFor(query.term, mall.lang);
                     
-                    // Asegurar que carguen los productos para la captura completa
+                    // Esperar carga y scroll
                     await plpPage.scrollToBottom();
                     
-                    // Guardar URL final en el reporte
                     testInfo.annotations.push({ type: 'URL Resultados', description: page.url() });
                     
-                } catch (error: any) {
-                    // Si falla, capturamos la URL exacta del error
+                } catch (error) {
                     testInfo.annotations.push({ type: 'URL ERROR', description: page.url() });
                     throw error;
                 }
