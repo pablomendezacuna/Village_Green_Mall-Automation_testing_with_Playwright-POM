@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { closeIntrusivePopups } from '../utils/PopupHandler';
 
 export class MainPage {
     readonly page: Page;
@@ -13,7 +14,7 @@ export class MainPage {
     }
 
     async closePopup(lang: string) {
-        // Common selectors for closing modal popups
+        // Common selectors for generic modal popups
         const selectors = [
             'button[aria-label*="close" i]', 
             'button[aria-label*="cerrar" i]', 
@@ -23,7 +24,7 @@ export class MainPage {
         for (const s of selectors) {
             try {
                 const b = this.page.locator(s).first();
-                if (await b.isVisible()) await b.click({ force: true });
+                if (await b.isVisible({ timeout: 1000 })) await b.click({ force: true });
             } catch (e) {
                 // Ignore errors if popup is not found
             }
@@ -31,7 +32,11 @@ export class MainPage {
     }
 
     async searchFor(query: string, lang: string) {
+        // 1. Clean generic popups
         await this.closePopup(lang);
+        
+        // 2. Clean specific intrusive popups (Gift cards, cookies) before interacting
+        await closeIntrusivePopups(this.page);
         
         const inputSelectors = 'input[type="search"], input[placeholder*="Search" i], input[placeholder*="Buscar" i], .search-input';
         let input = this.page.locator(inputSelectors).first();
