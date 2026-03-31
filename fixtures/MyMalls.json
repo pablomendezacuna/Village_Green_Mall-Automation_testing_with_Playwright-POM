@@ -1,4 +1,21 @@
 [
+
+  {
+    "name": "plaza-las-americas",
+    "url": "https://plaza-las-americas.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "plaza-del-caribe",
+    "url": "https://plaza-del-caribe.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "mall-of-america",
+    "url": "https://mall-of-america.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  
   {
     "name": "cushmanwakefield-bayshore-shopping-centre",
     "url": "https://bayshore-shopping-centre.ui-stg.mall.adeptmind.ai",
@@ -23,20 +40,6 @@
     "name": "kings-cross",
     "url": "https://kings-cross.ui-stg.mall.adeptmind.ai",
     "lang": "en"
-  },
-  {
-    "name": "plaza-las-americas",
-    "url": "https://plaza-las-americas.ui-stg.mall.adeptmind.ai",
-    "lang": "en"
-  },
-  {
-    "name": "plaza-del-caribe",
-    "url": "https://plaza-del-caribe.ui-stg.mall.adeptmind.ai",
-    "lang": "en"
-  },
-  {
-    "name": "mall-of-america",
-    "url": "https://mall-of-america.ui-stg.mall.adeptmind.ai",
-    "lang": "en"
   }
+  
 ]

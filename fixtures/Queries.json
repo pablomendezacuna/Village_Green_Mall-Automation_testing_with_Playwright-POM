@@ -1,3 +1,7 @@
 [
-    { "id": "q1", "term": "easter-holiday" }
+    { "id": "q1", "term": "graduation" },
+    { "id": "q2", "term": "grad-gifts-for-her" },
+    { "id": "q3", "term": "grad-gifts-for-him" },
+    { "id": "q4", "term": "grad-outfits-for-her" },
+    { "id": "q5", "term": "grad-outfits-for-him" }
 ]
