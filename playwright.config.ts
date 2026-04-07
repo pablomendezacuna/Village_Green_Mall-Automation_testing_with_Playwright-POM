@@ -6,10 +6,10 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: false, // Cambiado a false para evitar conflictos de sesión en Staging
+  fullyParallel: false, 
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: 1, // Un solo trabajador asegura estabilidad en las capturas
+  workers: 1, 
   reporter: [['html', { open: 'never' }]],
 
   use: {
@@ -19,9 +19,9 @@ export default defineConfig({
     },
     ignoreHTTPSErrors: true,
     screenshot: 'on',
-    trace: 'on',
+    trace: 'retain-on-failure',
     video: 'off',
-    viewport: { width: 1280, height: 720 },
+    viewport: { width: 1280, height: 800 },
   },
 
   projects: [

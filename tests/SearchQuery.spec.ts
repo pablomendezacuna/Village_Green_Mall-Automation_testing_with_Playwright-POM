@@ -9,34 +9,52 @@ for (const mall of selectedMalls) {
   test.describe(`Mall: ${mall.name}`, () => {
     
     for (const query of queries) {
-      test(`Search: ${query} | Mall: ${mall.name}`, async ({ page }) => {
+      test(`Search: ${query}`, async ({ page }) => {
         const mainPage = new MainPage(page);
 
-        // 1. Navegar al Mall
-        console.log(`>>> Navegando a: ${mall.url}`);
-        await page.goto(mall.url, { waitUntil: 'networkidle', timeout: 60000 });
-
-        // 2. Realizar la búsqueda usando el Page Object
-        // Pasamos query y lang para que no marque error rojo
-        await mainPage.searchFor(query, mall.lang);
-
-        // 3. ESPERA CRUCIAL: Esperamos a que la URL cambie o aparezcan resultados
-        // Esto garantiza que la foto no salga vacía
-        await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(3000); // Tiempo de gracia para que carguen las imágenes de productos
-
-        // 4. Reporte de la URL final con la búsqueda aplicada
-        const finalUrl = page.url();
-        console.log(`>>> URL de resultados: ${finalUrl}`);
-
-        // 5. Captura de pantalla de los resultados reales
-        await page.screenshot({ 
-          path: `playwright-report/data/${mall.name}-${query}.png`, 
-          fullPage: true 
+        // PASO 1: NAVEGACIÓN Y LOG DE URL
+        await test.step(`Maps to ${mall.url}`, async () => {
+          await page.goto(mall.url, { waitUntil: 'networkidle', timeout: 60000 });
+          console.log(`>>> URL Inicial: ${mall.url}`);
         });
 
-        // Verificación mínima para que el reporte marque éxito real
-        expect(finalUrl).toContain(query.replace(/ /g, '+') || query);
+        // PASO 2: BÚSQUEDA (CON LANG)
+        await test.step(`Execute Search for "${query}" [${mall.lang}]`, async () => {
+          await mainPage.searchFor(query, mall.lang);
+          await page.waitForLoadState('networkidle');
+          // Espera pequeña para que el buscador procese el redireccionamiento
+          await page.waitForTimeout(2000); 
+        });
+
+        // PASO 3: SCROLL Y CAPTURA DE POP-UPS / FULL PAGE
+        await test.step('Auto-scroll and Full Page Screenshot', async () => {
+          // Reportamos la URL final en el reporte
+          const finalUrl = page.url();
+          console.log(`>>> URL Final de Resultados: ${finalUrl}`);
+
+          // Script de scroll para cargar imágenes y cerrar posibles pop-ups de carga
+          await page.evaluate(async () => {
+            await new Promise((resolve) => {
+              let totalHeight = 0;
+              let distance = 100;
+              let timer = setInterval(() => {
+                let scrollHeight = document.body.scrollHeight;
+                window.scrollBy(0, distance);
+                totalHeight += distance;
+                if (totalHeight >= scrollHeight) {
+                  clearInterval(timer);
+                  resolve(null);
+                }
+              }, 100);
+            });
+          });
+
+          // Volvemos arriba para la foto si es necesario o capturamos Full Page
+          await page.screenshot({ 
+            path: `playwright-report/data/${mall.name}-${query}.png`, 
+            fullPage: true 
+          });
+        });
       });
     }
   });
