@@ -7,7 +7,7 @@ on:
         required: false
         default: ''
       queries:
-        description: 'Queries separadas por coma (ej: shoes, pants)'
+        description: 'Queries separadas por coma'
         required: true
         default: 'shoes'
 
@@ -17,10 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      # Variables dinámicas de los Inputs
       MALL_INDICES: ${{ github.event.inputs.mall_indices }}
       QUERIES: ${{ github.event.inputs.queries }}
-      # Credenciales desde Secrets de GitHub
       MALL_HTTP_USER: ${{ secrets.MALL_HTTP_USER }}
       MALL_HTTP_PASSWORD: ${{ secrets.MALL_HTTP_PASSWORD }}
       CI: true
@@ -36,7 +34,10 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run Playwright tests
         run: npx playwright test
-      - uses: actions/upload-artifact@v4
+      
+      # SUBIR REPORTE COMPLETO (CON FOTOS)
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report

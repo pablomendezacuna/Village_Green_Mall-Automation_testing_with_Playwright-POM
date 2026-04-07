@@ -6,21 +6,25 @@ const selectedMalls = getSelectedMalls();
 const queries = getQueries();
 
 for (const mall of selectedMalls) {
-    test.describe(`Testing Mall: ${mall.name}`, () => {
+    test.describe(`Mall: ${mall.name}`, () => {
         
         for (const query of queries) {
             test(`Search for "${query}" at ${mall.url}`, async ({ page }) => {
                 const mainPage = new MainPage(page);
                 
-                console.log(`>>> PROBANDO: ${mall.name} | URL: ${mall.url} | QUERY: ${query}`);
+                console.log(`>>> NAVEGANDO A: ${mall.url}`);
                 
-                // Navegación con manejo de errores de certificado y timeout
+                // 1. Ir a la URL
                 await page.goto(mall.url, { waitUntil: 'networkidle', timeout: 60000 });
                 
-                // Aquí ejecutas tu lógica de búsqueda real
-                // await mainPage.searchFor(query);
+                // 2. Esperar a que el cuerpo de la página sea visible
+                await page.waitForSelector('body', { state: 'visible' });
                 
-                console.log(`>>> ÉXITO: Búsqueda completada en ${mall.name}`);
+                // 3. Captura manual para asegurar que aparezca en el reporte
+                await page.screenshot({ path: `screenshots/${mall.name}-${query}.png`, fullPage: true });
+                
+                // 4. Log para confirmar en consola de GH
+                console.log(`>>> CAPTURA REALIZADA EN: ${mall.name}`);
             });
         }
     });
