@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       mall_indices:
-        description: 'Índices de AllCanadianMalls (ej: 0,33). Vacío para MyMalls.'
+        description: 'Índices (ej: 0,33). Vacío usa MyMalls.'
         required: false
         default: ''
       queries:
-        description: 'Queries separadas por coma'
+        description: 'Queries (ej: shoes, pants)'
         required: true
         default: 'shoes'
 
@@ -15,14 +15,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    
     env:
       MALL_INDICES: ${{ github.event.inputs.mall_indices }}
       QUERIES: ${{ github.event.inputs.queries }}
       MALL_HTTP_USER: ${{ secrets.MALL_HTTP_USER }}
       MALL_HTTP_PASSWORD: ${{ secrets.MALL_HTTP_PASSWORD }}
       CI: true
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,9 +32,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run Playwright tests
         run: npx playwright test
-      
-      # SUBIR REPORTE COMPLETO (CON FOTOS)
-      - name: Upload Playwright Report
+      - name: Upload Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
