@@ -1,61 +1,34 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { MainPage } from '../pages/Main_Page';
-import { getSelectedMalls, getQueries } from '../utils/dataLoader';
+import { PlpPage } from '../pages/Plp';
+import { getMallsToTest, getQueriesToTest } from '../utils/dataLoader';
 
-const selectedMalls = getSelectedMalls();
-const queries = getQueries();
+const mallsToTest = getMallsToTest();
+const queriesToTest = getQueriesToTest();
 
-for (const mall of selectedMalls) {
-  test.describe(`Mall: ${mall.name}`, () => {
-    
-    for (const query of queries) {
-      test(`Search: ${query}`, async ({ page }) => {
-        const mainPage = new MainPage(page);
+test.describe('Mall Search Validation', () => {
+    for (const mall of mallsToTest) {
+        for (const query of queriesToTest) {
+            test(`${mall.name} | ${query.term}`, async ({ page }, testInfo) => {
+                const mainPage = new MainPage(page);
+                const plpPage = new PlpPage(page);
 
-        // PASO 1: NAVEGACIÓN Y LOG DE URL
-        await test.step(`Maps to ${mall.url}`, async () => {
-          await page.goto(mall.url, { waitUntil: 'networkidle', timeout: 60000 });
-          console.log(`>>> URL Inicial: ${mall.url}`);
-        });
+                testInfo.annotations.push({ type: 'Original URL', description: mall.url });
 
-        // PASO 2: BÚSQUEDA (CON LANG)
-        await test.step(`Execute Search for "${query}" [${mall.lang}]`, async () => {
-          await mainPage.searchFor(query, mall.lang);
-          await page.waitForLoadState('networkidle');
-          // Espera pequeña para que el buscador procese el redireccionamiento
-          await page.waitForTimeout(2000); 
-        });
-
-        // PASO 3: SCROLL Y CAPTURA DE POP-UPS / FULL PAGE
-        await test.step('Auto-scroll and Full Page Screenshot', async () => {
-          // Reportamos la URL final en el reporte
-          const finalUrl = page.url();
-          console.log(`>>> URL Final de Resultados: ${finalUrl}`);
-
-          // Script de scroll para cargar imágenes y cerrar posibles pop-ups de carga
-          await page.evaluate(async () => {
-            await new Promise((resolve) => {
-              let totalHeight = 0;
-              let distance = 100;
-              let timer = setInterval(() => {
-                let scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-                if (totalHeight >= scrollHeight) {
-                  clearInterval(timer);
-                  resolve(null);
+                try {
+                    // Mantenemos tus funciones exitosas de navegación y búsqueda
+                    await mainPage.navigateTo(mall.url);
+                    await mainPage.searchFor(query.term, mall.lang);
+                    
+                    // El scroll humano que ya te funcionaba para fotos perfectas
+                    await plpPage.scrollToBottom();
+                    
+                    testInfo.annotations.push({ type: 'Result URL', description: page.url() });
+                } catch (error) {
+                    testInfo.annotations.push({ type: 'ERROR URL', description: page.url() });
+                    throw error;
                 }
-              }, 100);
             });
-          });
-
-          // Volvemos arriba para la foto si es necesario o capturamos Full Page
-          await page.screenshot({ 
-            path: `playwright-report/data/${mall.name}-${query}.png`, 
-            fullPage: true 
-          });
-        });
-      });
+        }
     }
-  });
-}
+});

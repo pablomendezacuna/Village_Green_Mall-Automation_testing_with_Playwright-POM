@@ -1,41 +1,55 @@
 name: Playwright Tests
 on:
+  push:
+    branches: [ main, master, stagebranch ]
   workflow_dispatch:
     inputs:
       mall_indices:
-        description: 'Índices (ej: 0,33). Vacío usa MyMalls.'
+        description: 'Índices de malls (ej: 0,33). Dejar vacío para usar MyMalls.json'
         required: false
         default: ''
       queries:
-        description: 'Queries (ej: shoes, pants)'
-        required: true
-        default: 'shoes'
+        description: 'Manual queries (e.g., nike, shoes). Vacío usa Queries.json'
+        required: false
+        default: ''
 
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      MALL_INDICES: ${{ github.event.inputs.mall_indices }}
-      QUERIES: ${{ github.event.inputs.queries }}
-      MALL_HTTP_USER: ${{ secrets.MALL_HTTP_USER }}
-      MALL_HTTP_PASSWORD: ${{ secrets.MALL_HTTP_PASSWORD }}
-      CI: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
-      - name: Run Playwright tests
-        run: npx playwright test
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Get Playwright version
+      id: playwright-version
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').devDependencies['@playwright/test']?.version || 'latest')")" >> $GITHUB_ENV
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests
+      run: npx playwright test
+      env:
+        # Credenciales de GitHub Secrets
+        MALL_HTTP_USER: ${{ secrets.MALL_USERNAME }}
+        MALL_HTTP_PASSWORD: ${{ secrets.MALL_PASSWORD }}
+        # Inputs de la UI
+        MALL_INDICES: ${{ github.event.inputs.mall_indices }}
+        MANUAL_QUERIES: ${{ github.event.inputs.queries }}
+
+    - name: Upload Playwright Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: reporte-automatizacion-malls
+        path: playwright-report/
+        retention-days: 7

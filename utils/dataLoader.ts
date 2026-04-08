@@ -1,27 +1,31 @@
 import * as myMalls from '../fixtures/MyMalls.json';
 import * as allCanadianMalls from '../fixtures/AllCanadianMalls.json';
+import * as dataQueries from '../fixtures/Queries.json';
 
-export function getSelectedMalls() {
-  const mallIndicesRaw = process.env.MALL_INDICES;
+export function getMallsToTest() {
+    const indicesRaw = process.env.MALL_INDICES;
+    
+    // Si no hay índices, devolvemos la lista por defecto (MyMalls.json)
+    if (!indicesRaw || indicesRaw.trim() === '') {
+        const malls = (myMalls as any).default || myMalls;
+        return Array.isArray(malls) ? malls : Object.values(malls);
+    }
 
-  // Si no hay índices (Local o GH), usamos MyMalls.json
-  if (!mallIndicesRaw || mallIndicesRaw.trim() === '') {
-    const defaultMalls = (myMalls as any).default || myMalls;
-    return Array.isArray(defaultMalls) ? defaultMalls : Object.values(defaultMalls);
-  }
+    // Si hay índices, filtramos AllCanadianMalls.json
+    const indices = indicesRaw.split(',').map(i => parseInt(i.trim()));
+    const allMalls = (allCanadianMalls as any).default || allCanadianMalls;
+    const allMallsArray = Array.isArray(allMalls) ? allMalls : Object.values(allMalls);
 
-  // Si hay índices, usamos AllCanadianMalls.json
-  const indices = mallIndicesRaw.split(',').map(i => parseInt(i.trim()));
-  const allMallsArray = (allCanadianMalls as any).default || allCanadianMalls;
-  const finalArray = Array.isArray(allMallsArray) ? allMallsArray : Object.values(allMallsArray);
-
-  return indices
-    .map(index => finalArray[index])
-    .filter(mall => mall !== undefined && mall.url);
+    return indices
+        .map(index => allMallsArray[index])
+        .filter(mall => mall !== undefined);
 }
 
-export function getQueries() {
-  const queriesRaw = process.env.QUERIES;
-  if (!queriesRaw || queriesRaw.trim() === '') return ['shoes']; 
-  return queriesRaw.split(',').map(q => q.trim());
+export function getQueriesToTest() {
+    const manualQueriesEnv = process.env.MANUAL_QUERIES;
+    if (manualQueriesEnv && manualQueriesEnv.trim() !== '') {
+        return manualQueriesEnv.split(',').map(q => ({ term: q.trim() }));
+    }
+    const defaultQueries = (dataQueries as any).default || dataQueries;
+    return defaultQueries;
 }
