@@ -1,61 +1,331 @@
 [
   {
-    "name": "cushmanwakefield-bayshore-shopping-centre",
-    "url": "https://bayshoreshoppingcentre.com/whatsinstore",
+    "name": "coolsprings-galleria-stg",
+    "url": "https://coolsprings-galleria.ui-stg.mall.adeptmind.ai/",
     "lang": "en"
   },
   {
-    "name": "cushmanwakefield-erin-mills",
-    "url": "https://erinmills.ca/whatsinstore",
+    "name": "hamilton-place-stg",
+    "url": "https://hamilton-place.ui-stg.mall.adeptmind.ai/",
     "lang": "en"
   },
   {
-    "name": "cushmanwakefield-midtown",
-    "url": "https://shopmidtown.ca/whatsinstore",
+    "name": "the-summit-birmingham-stg",
+    "url": "https://the-summit-birmingham.ui-stg.mall.adeptmind.ai/",
     "lang": "en"
   },
   {
-    "name": "morguard-bramalea-city-centre",
+    "name": "pacific-city-stg",
+    "url": "https://pacific-city.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "mainplace-mall-stg",
+    "url": "https://mainplace-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "vancouver-mall-stg",
+    "url": "https://vancouver-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "foxvalley-mall-stg",
+    "url": "https://foxvalley-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "connecticut-post-mall-stg",
+    "url": "https://connecticut-post-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "dulles-town-center-stg",
+    "url": "https://dulles-town-center.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "hawthorn-mall-stg",
+    "url": "https://hawthorn-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "westland-mall-stg",
+    "url": "http://westland-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "liberty-center-stg",
+    "url": "http://liberty-center.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "marketfair-shoppes-stg",
+    "url": "https://marketfair.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "brazos-mall-stg",
+    "url": "https://brazos-mall.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "pueblo-mall-stg",
+    "url": "https://pueblo-mall.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "mission-valley-stg",
+    "url": "https://mission-valley.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "arden-fair-stg",
+    "url": "https://arden-fair.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "bramalea-city-centre-stg",
+    "url": "https://bramalea-city-centre.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "coquitlam-centre-stg",
+    "url": "https://coquitlam-centre.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "place-rosemere-en-stg",
+    "url": "https://place-rosemere.ui-stg.mall.adeptmind.ai/en",
+    "lang": "en"
+  },
+  {
+    "name": "place-rosemere-fr-stg",
+    "url": "https://place-rosemere.ui-stg.mall.adeptmind.ai/",
+    "lang": "fr"
+  },
+  {
+    "name": "st-laurent-en-stg",
+    "url": "https://st-laurent-shopping-centre.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "st-laurent-fr-stg",
+    "url": "https://st-laurent-shopping-centre.ui-stg.mall.adeptmind.ai/fr",
+    "lang": "fr"
+  },
+  {
+    "name": "prairie-mall-stg",
+    "url": "https://prairie-mall.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "pine-centre-stg",
+    "url": "https://pine-centre.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "bayshore-shopping-centre-stg",
+    "url": "https://bayshore-shopping-centre.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "midtown-plaza-stg",
+    "url": "http://midtown.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "erin-mills-stg",
+    "url": "http://erin-mills.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "kings-cross-stg",
+    "url": "https://kings-cross.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "plaza-las-americas-stg",
+    "url": "https://plaza-las-americas.ui-stg.mall.adeptmind.ai/plazaplus",
+    "lang": "en"
+  },
+  {
+    "name": "plaza-del-caribe-stg",
+    "url": "https://plaza-del-caribe.ui-stg.mall.adeptmind.ai/plazaplus",
+    "lang": "en"
+  },
+  {
+    "name": "mall-of-america-stg",
+    "url": "https://mall-of-america.ui-stg.mall.adeptmind.ai",
+    "lang": "en"
+  },
+  {
+    "name": "village-green-stg",
+    "url": "https://village-green.ui-stg.mall.adeptmind.ai/",
+    "lang": "en"
+  },
+  {
+    "name": "coolsprings-galleria-prod",
+    "url": "https://www.coolspringsgalleria.com/products",
+    "lang": "en"
+  },
+  {
+    "name": "hamilton-place-prod",
+    "url": "https://www.hamiltonplace.com/products",
+    "lang": "en"
+  },
+  {
+    "name": "the-summit-birmingham-prod",
+    "url": "https://thesummitbirmingham.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "pacific-city-prod",
+    "url": "https://www.gopacificcity.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "mainplace-mall-prod",
+    "url": "https://www.shopmainplacemall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "vancouver-mall-prod",
+    "url": "https://www.shopvancouvermall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "foxvalley-mall-prod",
+    "url": "https://www.shopfoxvalleymall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "connecticut-post-mall-prod",
+    "url": "https://www.shopconnecticutpostmall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "dulles-town-center-prod",
+    "url": "https://www.shopdullestowncenter.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "hawthorn-mall-prod",
+    "url": "https://www.visithawthorn.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "westland-mall-prod",
+    "url": "https://www.shoppingwestlandmall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "liberty-center-prod",
+    "url": "https://www.liberty-center.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "marketfair-shoppes-prod",
+    "url": "https://www.marketfairshoppes.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "brazos-mall-prod",
+    "url": "https://www.shopbrazosmall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "pueblo-mall-prod",
+    "url": "https://www.shoppueblomall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "mission-valley-prod",
+    "url": "https://www.mission-valley.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "arden-fair-prod",
+    "url": "https://www.ardenfair.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "bramalea-city-centre-prod",
     "url": "https://bramaleacitycentre.ca/theshoplist",
     "lang": "en"
   },
   {
-    "name": "morguard-coquitlam-centre",
+    "name": "coquitlam-centre-prod",
     "url": "https://coquitlamcentre.com/theshoplist",
     "lang": "en"
   },
   {
-    "name": "morguard-french-place-rosemere",
-    "url": "https://placerosemere.com/acheter",
-    "lang": "fr"
-  },
-  {
-    "name": "morguard-french-st-laurent-shopping-centre",
-    "url": "https://shopstlaurent.com/buy/fr",
-    "lang": "fr"
-  },
-  {
-    "name": "morguard-place-rosemere",
+    "name": "place-rosemere-en-prod",
     "url": "https://placerosemere.com/acheter/en",
     "lang": "en"
   },
   {
-    "name": "morguard-pine-centre",
-    "url": "https://pinecentre.com/buy",
-    "lang": "en"
+    "name": "place-rosemere-fr-prod",
+    "url": "https://placerosemere.com/acheter",
+    "lang": "fr"
   },
   {
-    "name": "morguard-prairie-mall",
-    "url": "https://shopprairiemall.com/buy",
-    "lang": "en"
-  },
-  {
-    "name": "morguard-st-laurent-shopping-centre",
+    "name": "st-laurent-en-prod",
     "url": "https://shopstlaurent.com/buy",
     "lang": "en"
   },
   {
-    "name": "bentallgreenoak-village-green",
+    "name": "st-laurent-fr-prod",
+    "url": "https://shopstlaurent.com/buy/fr",
+    "lang": "fr"
+  },
+  {
+    "name": "prairie-mall-prod",
+    "url": "https://shopprairiemall.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "pine-centre-prod",
+    "url": "https://pinecentre.com/buy",
+    "lang": "en"
+  },
+  {
+    "name": "bayshore-shopping-centre-prod",
+    "url": "https://bayshoreshoppingcentre.com/whatsinstore",
+    "lang": "en"
+  },
+  {
+    "name": "midtown-plaza-prod",
+    "url": "https://shopmidtown.ca/whatsinstore",
+    "lang": "en"
+  },
+  {
+    "name": "erin-mills-prod",
+    "url": "https://erinmills.ca/whatsinstore",
+    "lang": "en"
+  },
+  {
+    "name": "kings-cross-prod",
+    "url": "https://www.kingscross.co.uk/shop",
+    "lang": "en"
+  },
+  {
+    "name": "plaza-las-americas-prod",
+    "url": "http://plazaplus.plazalasamericas.com",
+    "lang": "en"
+  },
+  {
+    "name": "plaza-del-caribe-prod",
+    "url": "http://plazaplus.plazadelcaribe.com",
+    "lang": "en"
+  },
+  {
+    "name": "mall-of-america-prod",
+    "url": "http://shop.mallofamerica.com",
+    "lang": "en"
+  },
+  {
+    "name": "village-green-prod",
     "url": "https://www.villagegreencentre.com/shop",
     "lang": "en"
   }

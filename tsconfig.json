@@ -8,9 +8,9 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*"]
+      "*": ["node_modules/*", "utils/*"]
     },
     "types": ["node", "@playwright/test"]
   },
-  "include": ["tests/**/*", "pages/**/*", "fixtures/**/*"]
+  "include": ["tests/**/*", "pages/**/*", "fixtures/**/*", "utils/**/*"]
 }

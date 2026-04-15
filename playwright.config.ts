@@ -1,13 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+import path from 'path';
+
+// Carga .env para Mac/Windows local
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 120000,
+  timeout: 180000, // Aumentado para dar tiempo al scroll humano
   fullyParallel: false,
   reporter: [['html', { open: 'never' }]],
   use: {
-    // Basic Authentication credentials handled via Environment Variables
     httpCredentials: {
       username: process.env.MALL_HTTP_USER || '',
       password: process.env.MALL_HTTP_PASSWORD || '',
@@ -16,6 +19,7 @@ export default defineConfig({
     trace: 'on',
     video: 'on-first-retry',
     viewport: { width: 1280, height: 720 },
+    ignoreHTTPSErrors: true,
   },
   projects: [
     {

@@ -1,30 +1,13 @@
 import { test } from '@playwright/test';
 import { MainPage } from '../pages/Main_Page';
 import { PlpPage } from '../pages/Plp';
+import { getMallsToTest, getQueriesToTest } from '../utils/dataLoader';
 
-// Data imports
-import dataMalls from '../fixtures/MyMalls.json';
-import dataQueries from '../fixtures/Queries.json';
-
-// Type definition for Query items
-interface QueryItem {
-    term: string;
-}
-
-// Logic to switch between Manual Input (GitHub) and Default JSON (Local/Push)
-const manualQueriesEnv = process.env.MANUAL_QUERIES;
-let queriesToTest: QueryItem[];
-
-if (manualQueriesEnv && manualQueriesEnv.trim() !== '') {
-    // Split the comma-separated string into an array of objects
-    queriesToTest = manualQueriesEnv.split(',').map(q => ({ term: q.trim() }));
-} else {
-    // Use the default JSON file
-    queriesToTest = dataQueries as QueryItem[];
-}
+const mallsToTest = getMallsToTest();
+const queriesToTest = getQueriesToTest();
 
 test.describe('Mall Search Validation', () => {
-    for (const mall of dataMalls) {
+    for (const mall of mallsToTest) {
         for (const query of queriesToTest) {
             test(`${mall.name} | ${query.term}`, async ({ page }, testInfo) => {
                 const mainPage = new MainPage(page);
@@ -33,11 +16,11 @@ test.describe('Mall Search Validation', () => {
                 testInfo.annotations.push({ type: 'Original URL', description: mall.url });
 
                 try {
-                    // Navigate using credentials from config
+                    // Mantenemos tus funciones exitosas de navegación y búsqueda
                     await mainPage.navigateTo(mall.url);
-                    // Perform the search operation
                     await mainPage.searchFor(query.term, mall.lang);
-                    // Scroll to ensure all content is loaded for the screenshot
+                    
+                    // El scroll humano que ya te funcionaba para fotos perfectas
                     await plpPage.scrollToBottom();
                     
                     testInfo.annotations.push({ type: 'Result URL', description: page.url() });

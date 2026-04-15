@@ -2,11 +2,14 @@ name: Playwright Tests
 on:
   push:
     branches: [ main, master, stagebranch ]
-  # This section enables the manual trigger button in the Actions tab
   workflow_dispatch:
     inputs:
+      mall_indices:
+        description: 'Índices de malls (ej: 0,33). Dejar vacío para usar MyMalls.json'
+        required: false
+        default: ''
       queries:
-        description: 'Manual queries (e.g., nike, shoes). Leave empty to use Queries.json'
+        description: 'Manual queries (e.g., nike, shoes). Vacío usa Queries.json'
         required: false
         default: ''
 
@@ -28,26 +31,19 @@ jobs:
 
     - name: Get Playwright version
       id: playwright-version
-      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
-
-    - name: Cache Playwright Browsers
-      uses: actions/cache@v4
-      id: playwright-cache
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').devDependencies['@playwright/test']?.version || 'latest')")" >> $GITHUB_ENV
 
     - name: Install Playwright Browsers
-      if: steps.playwright-cache.outputs.cache-hit != 'true'
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
       run: npx playwright test
       env:
-        # Pass GitHub Secrets to Environment Variables
+        # Credenciales de GitHub Secrets
         MALL_HTTP_USER: ${{ secrets.MALL_USERNAME }}
         MALL_HTTP_PASSWORD: ${{ secrets.MALL_PASSWORD }}
-        # Pass the manual input from the UI to the test script
+        # Inputs de la UI
+        MALL_INDICES: ${{ github.event.inputs.mall_indices }}
         MANUAL_QUERIES: ${{ github.event.inputs.queries }}
 
     - name: Upload Playwright Report

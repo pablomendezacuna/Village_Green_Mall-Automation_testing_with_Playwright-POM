@@ -53,7 +53,7 @@ export class MainPage {
         }
         
         // Wait for input to be ready, fill it, and press Enter
-        await input.waitFor({ state: 'visible', timeout: 15000 });
+        await input.waitFor({ state: 'visible', timeout: 45000 });
         await input.fill(query);
         await this.page.keyboard.press('Enter');
         
